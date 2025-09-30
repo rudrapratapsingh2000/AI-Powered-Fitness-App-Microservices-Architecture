@@ -1,0 +1,77 @@
+###. Download Apache Kafka Zip folder
+###. Extract Apache Kafka Zip folder (choose shortest path)
+
+Then Go To This Path in Cmd
+==:>D:\kafka_2.13-3.9.1\bin\windows>
+After that Run All Command
+
+2. Start zookeeper on separate cmd
+>>> zookeeper-server-start.bat ..\\..\\config\zookeeper.properties
+
+3. Start Broker means (Kafka Server) on separate cmd
+>>> kafka-server-start.bat ..\\..\\config\server.properties
+
+4. create topic on separate cmd
+>>> kafka-topics.bat --create --topic my-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3  
+
+5. after that create producer on same cmd if you want
+>>> kafka-console-producer.bat --broker-list localhost:9092 --topic my-topic  
+
+6. create consumer on separate cmd
+>>> kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my-topic --from-beginning  
+
+7. For kafka topics list
+>>> kafka-topics.bat --bootstrap-server=localhost:9092 --list  
+
+8. For consumer groups list
+>>> kafka-consumer-groups.bat --bootstrap-server=localhost:9092 --list  
+
+9. For describe kafka topics
+>>> .\kafka-topics.bat --describe --topic my-topic --bootstrap-server localhost:9092
+                    
+10. Assign group consumer
+>>> kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my-topic --group console-consumer-17840                    
+
+<<< ****************** For KEY Value ****************** >>
+
+4.1. create topic on separate cmd
+>>> kafka-topics.bat --create --topic fruits --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3
+
+5.1. create producer on same cmd if you want
+>>> kafka-console-producer.bat --broker-list localhost:9092 --topic fruits --property "key.separator=-" --property "parse.key=true"
+
+6.1. create consumer on separate cmd
+>>> kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fruits --from-beginning -property "key.separator=-" --property "print.key=true"
+
+<<<********************* Run Kafka Using Docker  ******************** >>>
+
+1. First run Docker desktop
+
+2. open cmd >>> C:\Users\rudra.singh>
+
+3. Get the Docker image: 
+  >>> C:\Users\rudra.singh>docker pull apache/kafka:4.1.0
+
+4. Start the Kafka Docker container: 
+  >>> C:\Users\rudra.singh>docker run -p 9092:9092 apache/kafka:4.1.0
+  
+4.1 If Start the Kafka Docker container in Detached Mode: 
+  >>> C:\Users\rudra.singh>docker run -d -p 9092:9092 apache/kafka:4.1.0
+  
+  
+Gemini api Key: AIzaSyAQdaIB8KfdJFrIdHC-4iw7KU4hgoX5aHw
+
+
+######################################################################################################################################################################
+
+Set up for Keycloak
+
+1. Download & unzip Keycloak
+2. Install & set up Java 11+
+3. Run kc.bat start-dev command on this path {{{  D:\keycloak-26.3.3\bin>  }}} in cmd
+4. Access http://localhost:8080 and create admin user 
+		user-name: admin 
+		password: admin
+		
+When running Keycloak using kc.bat start-dev, you can specify the HTTP port using the --http-port option.
+>>>  kc.bat start-dev --http-port=9090
