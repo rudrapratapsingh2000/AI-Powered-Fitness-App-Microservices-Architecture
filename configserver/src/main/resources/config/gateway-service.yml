@@ -1,0 +1,31 @@
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9090/realms/fitness-app/protocol/openid-connect/certs
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
+
+            - id: ai-service
+              uri: lb://AI-SERVICE
+              predicates:
+                - Path=/api/ai/**
+
+            - id: activityservice
+              uri: lb://ACTIVITYSERVICE
+              predicates:
+                - Path=/api/activity/**
